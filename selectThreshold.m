@@ -25,7 +25,21 @@ for epsilon = min(pval):stepsize:max(pval)
 
 
 
+    % Labeled as anomaly and algrithm predicts the same.
+    tp = sum((yval==1) & (pval<epsilon));
 
+    % Labeled as normal but algrithm predicts it as anomaly.
+    fp = sum((yval==0) & (pval<epsilon));
+
+    % Labeled as anomaly but algrithm predicts it as normal.
+    fn = sum((yval==1) & (pval>=epsilon));
+
+    % precision & recall
+    prec = tp/(tp+fp);
+    rec = tp/(tp+fn);
+
+    % F1 score;
+    F1 = (2*prec*rec)/(prec+rec);
 
 
 
